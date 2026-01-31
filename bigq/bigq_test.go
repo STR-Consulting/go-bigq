@@ -1,9 +1,9 @@
-package zetasql_test
+package bigq_test
 
 import (
 	"testing"
 
-	"github.com/pacer/go-bigq/zetasql"
+	"github.com/pacer/go-bigq/bigq"
 )
 
 func TestParseStatement(t *testing.T) {
@@ -21,7 +21,7 @@ func TestParseStatement(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			err := zetasql.ParseStatement(tt.sql)
+			err := bigq.ParseStatement(tt.sql)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ParseStatement(%q) error = %v, wantErr %v", tt.sql, err, tt.wantErr)
 			}
@@ -30,13 +30,13 @@ func TestParseStatement(t *testing.T) {
 }
 
 func TestAnalyzeStatement(t *testing.T) {
-	cat, err := zetasql.NewCatalog("test")
+	cat, err := bigq.NewCatalog("test")
 	if err != nil {
 		t.Fatalf("NewCatalog: %v", err)
 	}
 	defer cat.Close()
 
-	err = cat.AddTable("my_table", []zetasql.ColumnDef{
+	err = cat.AddTable("my_table", []bigq.ColumnDef{
 		{Name: "id", TypeName: "INT64"},
 		{Name: "name", TypeName: "STRING"},
 		{Name: "created_at", TypeName: "TIMESTAMP"},
@@ -58,7 +58,7 @@ func TestAnalyzeStatement(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			err := zetasql.AnalyzeStatement(tt.sql, cat)
+			err := bigq.AnalyzeStatement(tt.sql, cat)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AnalyzeStatement(%q) error = %v, wantErr %v", tt.sql, err, tt.wantErr)
 			}

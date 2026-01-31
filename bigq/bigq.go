@@ -1,6 +1,6 @@
-// Package zetasql provides a Go interface to Google's ZetaSQL (googlesql)
+// Package bigq provides a Go interface to Google's ZetaSQL (googlesql)
 // for parsing and analyzing BigQuery SQL.
-package zetasql
+package bigq
 
 import (
 	"github.com/pacer/go-bigq/internal/bridge"

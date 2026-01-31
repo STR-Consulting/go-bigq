@@ -5,21 +5,21 @@ import (
 	"strings"
 
 	"github.com/pacer/go-bigq/internal/schema"
-	"github.com/pacer/go-bigq/zetasql"
+	"github.com/pacer/go-bigq/bigq"
 )
 
 // BuildFromSchema creates a Catalog from a schema definition.
 // Tables with qualified names (project.dataset.table) get nested sub-catalogs.
-func BuildFromSchema(s *schema.Schema) (*zetasql.Catalog, error) {
-	cat, err := zetasql.NewCatalog("root")
+func BuildFromSchema(s *schema.Schema) (*bigq.Catalog, error) {
+	cat, err := bigq.NewCatalog("root")
 	if err != nil {
 		return nil, err
 	}
 
 	for _, table := range s.Tables {
-		columns := make([]zetasql.ColumnDef, len(table.Columns))
+		columns := make([]bigq.ColumnDef, len(table.Columns))
 		for i, col := range table.Columns {
-			columns[i] = zetasql.ColumnDef{
+			columns[i] = bigq.ColumnDef{
 				Name:     col.Name,
 				TypeName: col.Type,
 			}
@@ -54,7 +54,7 @@ func BuildFromSchema(s *schema.Schema) (*zetasql.Catalog, error) {
 }
 
 // BuildFromFile creates a Catalog from a schema JSON file.
-func BuildFromFile(path string) (*zetasql.Catalog, error) {
+func BuildFromFile(path string) (*bigq.Catalog, error) {
 	s, err := schema.LoadFile(path)
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func BuildFromFile(path string) (*zetasql.Catalog, error) {
 }
 
 // BuildFromDir creates a Catalog from all JSON schema files in a directory.
-func BuildFromDir(dir string) (*zetasql.Catalog, error) {
+func BuildFromDir(dir string) (*bigq.Catalog, error) {
 	s, err := schema.LoadDir(dir)
 	if err != nil {
 		return nil, err

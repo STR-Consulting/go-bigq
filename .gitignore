@@ -1,6 +1,7 @@
 .cache/
 .claude/settings.local.json
 .envrc
+.beans.clickup.yml
 tmp
 
 # Compiled binaries

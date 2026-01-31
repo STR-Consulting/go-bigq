@@ -8,7 +8,7 @@ import (
 	"os"
 	"github.com/pacer/go-bigq/internal/catalog"
 	"github.com/pacer/go-bigq/internal/lint"
-	"github.com/pacer/go-bigq/zetasql"
+	"github.com/pacer/go-bigq/bigq"
 )
 
 func main() {
@@ -48,7 +48,7 @@ func runLint(args []string, stdout, stderr io.Writer) int {
 	}
 
 	// Build catalog from schema
-	var cat *zetasql.Catalog
+	var cat *bigq.Catalog
 	if *schemaPath != "" {
 		var err error
 		cat, err = catalog.BuildFromFile(*schemaPath)

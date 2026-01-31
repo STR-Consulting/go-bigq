@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/pacer/go-bigq/zetasql"
+	"github.com/pacer/go-bigq/bigq"
 )
 
 // Result represents a single lint finding.
@@ -30,11 +30,11 @@ func (r Result) String() string {
 
 // Linter validates SQL statements against a catalog.
 type Linter struct {
-	catalog *zetasql.Catalog
+	catalog *bigq.Catalog
 }
 
 // New creates a new Linter with the given catalog.
-func New(catalog *zetasql.Catalog) *Linter {
+func New(catalog *bigq.Catalog) *Linter {
 	return &Linter{catalog: catalog}
 }
 
@@ -51,9 +51,9 @@ func (l *Linter) LintSQL(sql string) []Result {
 
 		var err error
 		if l.catalog != nil {
-			err = zetasql.AnalyzeStatement(trimmed, l.catalog)
+			err = bigq.AnalyzeStatement(trimmed, l.catalog)
 		} else {
-			err = zetasql.ParseStatement(trimmed)
+			err = bigq.ParseStatement(trimmed)
 		}
 
 		if err != nil {
