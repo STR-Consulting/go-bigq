@@ -1,0 +1,15 @@
+.cache/
+.claude/settings.local.json
+.envrc
+tmp
+
+# Compiled binaries
+/bin/
+/go-bigq
+
+# Bazel build output (built locally)
+/lib/*.a
+/lib/include/
+
+# Bazel cache
+/third_party/googlesql/bazel-*

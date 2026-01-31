@@ -1,0 +1,12 @@
+{
+  "tables": [
+    {
+      "name": "my_table",
+      "columns": [
+        {"name": "id", "type": "INT64"},
+        {"name": "name", "type": "STRING"},
+        {"name": "created_at", "type": "TIMESTAMP"}
+      ]
+    }
+  ]
+}
