@@ -1,0 +1,30 @@
+{
+   "file_scan_inclusions": [".beans/*"],
+   "file_scan_exclusions": [
+      "**/.git",
+      "**/.DS_Store"
+   ],
+   "lsp": {
+      "gopls": {
+         "initialization_options": {
+            "usePlaceholders": true,
+            "completeUnimported": true,
+            "experimentalPostfixCompletions": true,
+            "hints": {
+               "assignVariableTypes": false,
+               "compositeLiteralFields": false,
+               "compositeLiteralTypes": false,
+               "constantValues": true,
+               "functionTypeParameters": true,
+               "parameterNames": true,
+               "rangeVariableTypes": true
+            }
+         }
+      }
+   },
+   "languages": {
+      "SQL": {
+         "format_on_save": "off"
+      }
+   }
+}

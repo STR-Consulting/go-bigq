@@ -6,10 +6,13 @@ import (
 	"fmt"
 	"io"
 	"os"
+
+	"github.com/pacer/go-bigq/bigq"
 	"github.com/pacer/go-bigq/internal/catalog"
 	"github.com/pacer/go-bigq/internal/lint"
-	"github.com/pacer/go-bigq/bigq"
 )
+
+var version = "dev"
 
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdout, os.Stderr))
@@ -17,7 +20,7 @@ func main() {
 
 func run(args []string, stdout, stderr io.Writer) int {
 	if len(args) == 0 {
-		fmt.Fprintln(stderr, "Usage: bigq lint [flags] [files...]")
+		fmt.Fprintln(stderr, "Usage: go-bigq lint [flags] [files...]")
 		return 2
 	}
 
@@ -25,11 +28,11 @@ func run(args []string, stdout, stderr io.Writer) int {
 	case "lint":
 		return runLint(args[1:], stdout, stderr)
 	case "version":
-		fmt.Fprintln(stdout, "bigq version 0.1.0")
+		fmt.Fprintln(stdout, "go-bigq version "+version)
 		return 0
 	default:
 		fmt.Fprintf(stderr, "Unknown command: %s\n", args[0])
-		fmt.Fprintln(stderr, "Usage: bigq lint [flags] [files...]")
+		fmt.Fprintln(stderr, "Usage: go-bigq lint [flags] [files...]")
 		return 2
 	}
 }

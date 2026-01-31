@@ -31,8 +31,8 @@ test: lib
 	CGO_ENABLED=1 go test ./...
 
 # Build the CLI binary
-bigq: lib
-	CGO_ENABLED=1 go build -o bin/bigq ./cmd/bigq/
+go-bigq: lib
+	CGO_ENABLED=1 go build -o bin/go-bigq ./cmd/bigq/
 
 # Clean build artifacts
 clean:

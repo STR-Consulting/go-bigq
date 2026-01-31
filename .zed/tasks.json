@@ -1,0 +1,32 @@
+[
+   {
+      "label": "go test (unit)",
+      "command": "go test -v $ZED_RELATIVE_FILE -run $ZED_SYMBOL",
+      "tags": ["go-test"]
+   },
+   {
+      "label": "go test (all)",
+      "command": "go test -v ./...",
+      "tags": ["test"]
+   },
+   {
+      "label": "go test (race)",
+      "command": "go test -race -v ./...",
+      "tags": ["test"]
+   },
+   {
+      "label": "Build",
+      "command": "go build ./...",
+      "tags": ["build"]
+   },
+   {
+      "label": "Lint",
+      "command": "golangci-lint run ./...",
+      "tags": ["lint"]
+   },
+   {
+      "label": "Lint (Fix)",
+      "command": "golangci-lint run --fix ./...",
+      "tags": ["lint"]
+   }
+]
