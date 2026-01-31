@@ -49,6 +49,13 @@ func (l *Linter) LintSQL(sql string) []Result {
 			continue
 		}
 
+		// Skip DECLARE statements — valid BigQuery scripting syntax
+		// that ZetaSQL's parser doesn't support.
+		upper := strings.ToUpper(trimmed)
+		if strings.HasPrefix(upper, "DECLARE ") || strings.HasPrefix(upper, "DECLARE\n") || strings.HasPrefix(upper, "DECLARE\t") {
+			continue
+		}
+
 		var err error
 		if l.catalog != nil {
 			err = bigq.AnalyzeStatement(trimmed, l.catalog)

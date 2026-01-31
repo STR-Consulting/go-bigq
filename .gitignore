@@ -11,6 +11,7 @@ tmp
 # Bazel build output (built locally)
 /lib/*.a
 /lib/include/
+*.tar.gz
 
 # Bazel cache
 /third_party/googlesql/bazel-*

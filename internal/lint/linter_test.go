@@ -32,6 +32,35 @@ func TestSplitStatements(t *testing.T) {
 	}
 }
 
+func TestLintSQL_SkipsDeclare(t *testing.T) {
+	l := &Linter{} // parse-only, no catalog
+
+	tests := []struct {
+		name string
+		sql  string
+	}{
+		{"declare with default", "DECLARE run_date DATE DEFAULT CURRENT_DATE();\nSELECT 1"},
+		{"declare no default", "DECLARE inserted_rows INT64;\nSELECT 1"},
+		{"declare lowercase", "declare x INT64;\nSELECT 1"},
+		{"declare mixed case", "Declare x INT64;\nSELECT 1"},
+		{"multiple declares", "DECLARE a INT64;\nDECLARE b STRING;\nSELECT 1"},
+		{"declare only", "DECLARE x INT64"},
+		{"declare with tab", "DECLARE\tx INT64"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			results := l.LintSQL(tt.sql)
+			if len(results) != 0 {
+				t.Errorf("LintSQL(%q) returned %d errors, want 0", tt.sql, len(results))
+				for _, r := range results {
+					t.Logf("  %s", r)
+				}
+			}
+		})
+	}
+}
+
 func TestSplitStatementsLineTracking(t *testing.T) {
 	sql := "SELECT 1;\n\nSELECT 2;\nSELECT 3"
 	spans := splitStatements(sql)
