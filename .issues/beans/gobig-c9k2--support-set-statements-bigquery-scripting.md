@@ -5,7 +5,7 @@ status: completed
 type: bug
 priority: normal
 created_at: 2026-01-31T04:14:54Z
-updated_at: 2026-01-31T04:19:26Z
+updated_at: 2026-01-31T04:47:49Z
 ---
 
 go-bigq lint fails on SET statements. These are BQ scripting syntax for variable assignment:
